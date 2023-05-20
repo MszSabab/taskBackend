@@ -32,7 +32,7 @@ func (s *Server) handleCreatePost() http.HandlerFunc {
 			return
 		}
 
-		s.db.Insert(post.Title, post.Content, post.MediaURL, post.ID)
+		s.db.Create(post.Title, post.Content, post.MediaURL, post.ID)
 		//if err != nil {
 		//	log.Println(err)
 		//	w.WriteHeader(http.StatusInternalServerError)
