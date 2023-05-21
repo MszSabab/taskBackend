@@ -2,7 +2,7 @@ package httpserver
 
 import (
 	"encoding/json"
-	"fmt"
+	"github.com/rs/zerolog/log"
 	"net/http"
 	"strconv"
 )
@@ -16,7 +16,7 @@ func (s *Server) handleGetPosts() http.HandlerFunc {
 
 		posts, err := s.db.GetAllPosts(limit, offset)
 		if err != nil {
-			fmt.Println(err, ">>>>>>>>>>>>>>") // todo log
+			log.Error().Msgf("db query Error", err)
 			return
 		}
 

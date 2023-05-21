@@ -1,8 +1,9 @@
 package httpserver
 
 import (
+	"encoding/json"
 	"github.com/go-chi/chi/v5"
-	"log"
+	"github.com/rs/zerolog/log"
 	"net/http"
 	"strconv"
 )
@@ -16,11 +17,13 @@ func (s *Server) handleUnlikePost() http.HandlerFunc {
 
 		err := s.db.UnLikePost(postID)
 		if err != nil {
-			log.Println(err)
+			log.Error().Msgf("db query Error", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode("disliked")
 		w.WriteHeader(http.StatusOK)
 	}
 }
