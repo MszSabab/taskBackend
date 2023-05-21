@@ -33,8 +33,8 @@ func (s *Server) GetHandler() http.Handler {
 		httplog.RequestLogger(log.Logger),
 	)
 
-	router.Post("/posts", s.handleCreatePost())
-	//router.Get("/posts", s.handleGetPost())
+	router.Post("/createPost", s.handleCreatePost())
+	router.Get("/getPosts", s.handleGetPosts())
 	router.Post("/posts/{id}/like", s.handleLikePost())
 	router.Post("/posts/{id}/unlike", s.handleUnlikePost())
 	router.Post("/posts/{id}/comments", s.handleAddComment())
